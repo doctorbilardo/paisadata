@@ -1,2 +1,1 @@
-export { segmentTrack } from "./segment/segmentTrack";
-export { TrackingSentryScripts } from "./sentry/sentry";
+export { segmentTrack } from "./segment/segmentTrackFunctions";

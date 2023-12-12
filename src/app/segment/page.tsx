@@ -3,16 +3,19 @@ import { useEffect } from "react";
 import { Header } from "@/components/header";
 import useSendSwitchSectionEvent from "@/tracking/segment/hooks/useSendSwitchSectionEvent";
 import { usePathname } from "next/navigation";
+import useSegmentIdentifyUser from "@/tracking/segment/hooks/useSegmentIdentifyUser";
 
 export default function Segment() {
   const pathname = usePathname();
 
   const sendSwitchSectionEvent = useSendSwitchSectionEvent();
+  const identifySegmentEvent = useSegmentIdentifyUser();
 
   useEffect(() => {
     if (!pathname) return;
     sendSwitchSectionEvent(pathname);
-  }, [pathname, sendSwitchSectionEvent]);
+    identifySegmentEvent();
+  }, [identifySegmentEvent, pathname, sendSwitchSectionEvent]);
 
   return (
     <main className={`flex min-h-screen flex-col items-center p-24 `}>
