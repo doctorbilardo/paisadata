@@ -6,17 +6,21 @@ import useSendSwitchSectionEvent from "@/tracking/segment/hooks/useSendSwitchSec
 import { usePathname } from "next/navigation";
 import useSegmentIdentifyUser from "@/tracking/segment/hooks/useSegmentIdentifyUser";
 
+
 export default function Segment() {
   const pathname = usePathname();
 
   const sendSwitchSectionEvent = useSendSwitchSectionEvent();
   const identifySegmentEvent = useSegmentIdentifyUser();
 
+
   useEffect(() => {
     if (!pathname) return;
     sendSwitchSectionEvent(pathname);
     identifySegmentEvent();
   }, [identifySegmentEvent, pathname, sendSwitchSectionEvent]);
+
+
 
   return (
     <main className={`flex min-h-screen flex-col items-center p-2 `}>
@@ -47,10 +51,12 @@ export default function Segment() {
         <div className="flex flex-col md:flex-row items-center justify-center max-w-screen-lg mx-auto mt-4">
           <div className="w-full md:w-1/2 ">
             {/* División izquierda para el texto */}
-            <p className={`m-0  text-lg   text-white pr-4 `}>
-              En este ejemplo se está utilizando la función analytics.indentify() para registrar 
-              al usuario conectado.El primer parámetro es el nombre del evento, en este caso identify_user_german, y el segundo sería un objeto, en este caso con las props
-              name e email.
+            <p className={`m-0  text-lg   text-white pr-4 pb-6 `}>
+              En este ejemplo se está utilizando la función
+              analytics.indentify() para registrar al usuario conectado.El
+              primer parámetro es el nombre del evento, en este caso
+              identify_user_german, y el segundo sería un objeto, en este caso
+              con las props name e email.
             </p>
           </div>
           <div className="w-full md:w-1/2 p-0">
@@ -62,10 +68,11 @@ export default function Segment() {
           </div>
         </div>
 
-        <div className="max-w-screen-lg mx-auto mt-6 mb-6">
-        <p className={`m-0  text-lg   text-white pb-4 `}>
-              Y asi se vería en el dashboard de Segement en donde hemos conectado la app, en este caso el http://localhost:3000/
-            </p>
+        <div className="max-w-screen-lg mx-auto mt-6 mb-2">
+          <p className={`m-0  text-lg   text-white pb-4 `}>
+            Y asi se vería en el dashboard de Segement en donde hemos conectado
+            la app, en este caso el http://localhost:3000/
+          </p>
           <img
             src="./images/segment-dash.png"
             alt="Descripción de la imagen"
@@ -73,7 +80,7 @@ export default function Segment() {
           />
         </div>
 
-        <div className="group rounded-lg border border-transparent px-5 py-4 ">
+        <div className="group rounded-lg border border-transparent px-5 py-2 ">
           <h3 className={`mb-4 text-3xl font-semibold text-center sm:mb-0`}>
             Implementacion{" "}
           </h3>

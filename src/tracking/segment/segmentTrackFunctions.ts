@@ -1,11 +1,4 @@
-declare global {
-  interface Window {
-    analytics: {
-      track: any;
-      identify: any;
-    };
-  }
-}
+
 
 /*
 

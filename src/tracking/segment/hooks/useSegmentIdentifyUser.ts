@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { segmentUserIdentify } from "../segmentTrackFunctions";
-import { SegmentEventProps, SegmentEvents } from "@/typings";
+import { EventProps, SegmentEvents } from "@/typings";
 
 /**
  * @method useSegmentIdentifyUser is a custom hook that provides the function to track "identify user" segment event
@@ -16,7 +16,7 @@ import { SegmentEventProps, SegmentEvents } from "@/typings";
  */
 const useSegmentIdentifyUser = () => {
   const identifySegmentEvent = useCallback(() => {
-    const identifyEvent: SegmentEventProps = {
+    const identifyEvent: EventProps = {
       name: "German",
       email: "g.derbes@paisanos.io",
     };

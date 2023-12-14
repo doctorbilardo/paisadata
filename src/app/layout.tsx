@@ -16,6 +16,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const estiloDiv = {
+    display: "none",
+    visibility: "hidden",
+  };
+  
+
   return (
     <html lang="en" className={National.className}>
       <head>
@@ -23,12 +29,9 @@ export default function RootLayout({
         {/*OpenGraph metadata*/}
         <meta name="robots" content="index, follow" />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="German Derbes Catoni | Front-end dev"
-        />
+        <meta property="og:title" content="paisadata" />
         <meta property="og:description" content="paisadata" />
-
+        {/*<-- Segment -->*/}
         <Script
           dangerouslySetInnerHTML={{
             __html: `
@@ -39,8 +42,30 @@ export default function RootLayout({
               `,
           }}
         />
+        {/*<-- Google Tag Manager -->*/}
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer', 'GTM-T77K6DD6');
+              `,
+          }}
+        />
       </head>
-      <body>{children}</body>
+      <body>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-T77K6DD6"
+            height="0"
+            width="0"
+            style={estiloDiv as React.CSSProperties}
+          ></iframe>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

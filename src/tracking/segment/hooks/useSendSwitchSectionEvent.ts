@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { segmentTrack } from "../segmentTrackFunctions";
 import packageJson from "../../../../package.json";
-import { SegmentEventProps, SegmentEvents } from "@/typings";
+import { EventProps, SegmentEvents } from "@/typings";
 
 type sendSwitchSectionEventFunction = (pathname: string) => void;
 
@@ -27,7 +27,7 @@ type sendSwitchSectionEventFunction = (pathname: string) => void;
  */
 const useSendSwitchSectionEvent = (): sendSwitchSectionEventFunction => {
   const sendSwitchSectionEvent = useCallback((pathname: string) => {
-    const switchSectionEvent: SegmentEventProps = {
+    const switchSectionEvent: EventProps = {
       version: packageJson?.version,
       name: packageJson?.name,
       to: pathname,

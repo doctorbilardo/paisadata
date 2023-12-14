@@ -3,6 +3,11 @@ export enum SegmentEvents {
   identifyUser = "identify_user_german",
 }
 
-export interface SegmentEventProps {
+export enum GtmEvents {
+  gtmUserData = "gtm_user_data",
+  gtmNameOfTheSection = "name_of_the_section"
+}
+
+export interface EventProps {
   [key: string]: string | number;
 }
