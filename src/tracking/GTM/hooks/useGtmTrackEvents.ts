@@ -21,7 +21,18 @@ const useSendGTMEvents = () => {
     return gtmTrackEvent(GtmEvents.gtmNameOfTheSection, gtmUserEvent);
   }, []);
 
-  return { sendGtmUserEvent, sendNameSectionEvent };
+  const sendChampionsEvent = useCallback((path: string) => {
+    const gtmChampionsEvent: EventProps = {
+      path,
+      section: `
+      Abriendo el modal en: ${path}
+      `,
+      text: 'Modal campeón del mundo'
+    };
+    return gtmTrackEvent(GtmEvents.gtmwWorldCupChampions, gtmChampionsEvent);
+  }, []);
+
+  return { sendGtmUserEvent, sendNameSectionEvent, sendChampionsEvent };
 };
 
 export default useSendGTMEvents;

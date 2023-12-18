@@ -5,7 +5,8 @@ export enum SegmentEvents {
 
 export enum GtmEvents {
   gtmUserData = "gtm_user_data",
-  gtmNameOfTheSection = "name_of_the_section"
+  gtmNameOfTheSection = "name_of_the_section",
+  gtmwWorldCupChampions = "world_cup_champions",
 }
 
 export interface EventProps {

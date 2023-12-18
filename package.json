@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@segment/snippet": "^5.2.0",
     "geist": "^1.2.0",
     "next": "14.0.4",

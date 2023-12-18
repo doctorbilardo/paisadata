@@ -76,7 +76,7 @@ export default function Segment() {
           <img
             src="./images/segment-dash.png"
             alt="Descripción de la imagen"
-            className="w-auto h-auto max-w-full max-h-full"
+            className="w-auto h-auto max-w-full max-h-full rounded-lg"
           />
         </div>
 

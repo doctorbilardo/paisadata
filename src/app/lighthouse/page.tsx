@@ -13,11 +13,11 @@ export default function LightHouse() {
       <Header />
       <section className="container h-64 max-w-5xl px-8 my-4">
         <div className="relative flex  flex-col text-center ">
-          <h1
+          <h2
             className={`text-8xl font-bold text-yellow-400 mb-3 ${National.className}`}
           >
             💡LIGHTHOUSE
-          </h1>
+          </h2>
         </div>
       </section>
     </main>

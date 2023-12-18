@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { GeistSans } from "geist/font/sans";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
@@ -55,7 +56,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body className={GeistSans.className}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-T77K6DD6"
