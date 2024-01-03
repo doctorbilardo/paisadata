@@ -13,6 +13,9 @@
     "@segment/snippet": "^5.2.0",
     "geist": "^1.2.0",
     "next": "14.0.4",
+    "next-auth": "^4.24.5",
+    "posthog-js": "^1.96.1",
+    "posthog-node": "^3.3.0",
     "react": "^18",
     "react-dom": "^18"
   },

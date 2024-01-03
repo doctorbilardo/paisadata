@@ -1,10 +1,24 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import Link from "next/link";
+import PostHogClient from "@/components/postHog/PostHogClient";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getData();
+  const postHogClient = PostHogClient();
+
+  /**
+   *
+   * SERVER SIDE EVENTS POSTHOG NODE
+   */
+
+  postHogClient.capture({
+    distinctId: "ger@paisanos.io",
+    event: "Home Page Viewed",
+  });
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-8`}
@@ -40,9 +54,7 @@ export default function Home() {
         >
           PAISADATA
         </h1>
-        <p className={`m-0 max-w-[30ch]    text-white text-3xl mb-3`}>
-          Consigna:
-        </p>
+
         <p className={`m-0 max-w-[30ch]  text-amber-300 text-2xl`}>
           Investigar y setear herramientas de análisis de producto que nos
           permitan poder medir los OKRs o KPIs definidos del producto.
@@ -68,57 +80,6 @@ export default function Home() {
         </Link>
 
         <Link
-          href="/hotjar"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            HotJar{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm   text-amber-300`}>
-            Hotjar genera mapas de calor que muestran visualmente las áreas de
-            una página web en las que los usuarios hacen clic, tocan o pasan más
-            tiempo.
-          </p>
-        </Link>
-
-        <Link
-          href="/amplitude"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Amplitude{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm  text-amber-300`}>
-            Amplitude es una herramienta de análisis de datos centrada en el
-            comportamiento del usuario en aplicaciones y sitios web.
-          </p>
-        </Link>
-
-        <Link
-          href="/lighthouse"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Lighthouse{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm  text-amber-300`}>
-            Permite evaluar y mejorar la calidad general de una página web a
-            partir de auditorías automatizadas para medir el rendimiento, la
-            accesibilidad, las mejores prácticas de SEO y la progresividad web
-            de un sitio.
-          </p>
-        </Link>
-
-        <Link
           href="/googleTagManager"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
         >
@@ -134,20 +95,40 @@ export default function Home() {
         </Link>
 
         <Link
-          href="/googleTagManager"
+          href="/postHog"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Clarity{" "}
+            PostHog {""}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm  text-amber-300`}>
-            Permite evaluar y mejorar la calidad general de una página web a
+            Facilita la obtención de datos sobre el tráfico y el uso de su
+            aplicación
           </p>
         </Link>
       </div>
+
+      <h2 className="text-xl font-bold text-yellow-300">Posts</h2>
+      <ul>
+        {posts?.map((post) => (
+          <div
+            key={post?.id}
+            className="p-4 mb-4 text-center border space-y-6 rounded-lg"
+          >
+            <Link href={`/posts/${post.id}`}>
+              <span>{post.title}</span>
+            </Link>
+          </div>
+        ))}
+      </ul>
     </main>
   );
+}
+
+export async function getData() {
+  const posts = await import("../../blog.json");
+  return posts?.posts;
 }

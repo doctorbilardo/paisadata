@@ -4,6 +4,11 @@ import "./globals.css";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { GeistSans } from "geist/font/sans";
+import {
+  PHProvider,
+
+} from "@/components/postHog/PostHogPageview";
+import { Suspense } from "react";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
@@ -21,7 +26,6 @@ export default function RootLayout({
     display: "none",
     visibility: "hidden",
   };
-  
 
   return (
     <html lang="en" className={National.className}>
@@ -56,17 +60,20 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={GeistSans.className}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-T77K6DD6"
-            height="0"
-            width="0"
-            style={estiloDiv as React.CSSProperties}
-          ></iframe>
-        </noscript>
-        {children}
-      </body>
+     
+      <PHProvider>
+        <body className={GeistSans.className}>
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-T77K6DD6"
+              height="0"
+              width="0"
+              style={estiloDiv as React.CSSProperties}
+            ></iframe>
+          </noscript>
+          {children}
+        </body>
+      </PHProvider>
     </html>
   );
 }

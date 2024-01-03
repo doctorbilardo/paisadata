@@ -1,0 +1,28 @@
+{
+    "posts": [
+        {
+            "id": "1",
+            "name": "Ferrari",
+            "title": "Primera carrera de Ferrari del Año",
+            "author": "Charles Leclerc"
+          },
+          {
+            "id": "2",
+            "name": "RedBull",
+            "title": "Primera carrera de RedBull del año",
+            "author": "Verstappen"
+          },
+          {
+            "id": "3",
+            "name": "McLaren",
+            "title": "Primera carrera de McLaren del año",
+            "author": "Lando Norris"
+          },
+          {
+            "id": "4",
+            "name": "Renault",
+            "title": "Primera carrera de Renault del año",
+            "author": "Fernando Alonso"
+          }
+    ]
+}
