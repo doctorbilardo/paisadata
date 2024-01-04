@@ -1,5 +1,6 @@
 "use client";
 import { Header } from "@/components/header";
+import { trackPostHogClientEvents } from "@/tracking/postHog/trackPostHogClientEvents";
 import localFont from "next/font/local";
 import posthog from "posthog-js";
 import { useState } from "react";
@@ -19,7 +20,7 @@ export default function PostHog() {
    * @return register a posthog event
    */
   const clickEvent = () => {
-    posthog.capture("click", {
+    trackPostHogClientEvents("click", {
       clickedButton: true,
     });
   };

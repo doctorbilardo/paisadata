@@ -9,3 +9,10 @@ export default function PostHogClient() {
   });
   return postHogClient;
 }
+const postHogClient = PostHogClient();
+
+export const trackPostHogServerEvents = ({distinctId, event}:{distinctId: string, event: string}) => {
+  if (postHogClient) {
+    postHogClient?.capture({ distinctId, event });
+  }
+};

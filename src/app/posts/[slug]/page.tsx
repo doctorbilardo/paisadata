@@ -1,14 +1,12 @@
 import { Header } from "@/components/header";
-import PostHogClient from "@/components/postHog/PostHogClient";
+import { trackPostHogServerEvents } from "@/tracking/postHog/trackPostHogServerEvents";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const posts = await import("../../../../blog.json");
 
   const result = posts?.posts?.find((post) => post?.id === params?.slug);
 
-  const postHogClient = PostHogClient();
-
-  postHogClient.capture({
+  trackPostHogServerEvents({
     distinctId: "ger@paisanos.io",
     event: `Post: ${result?.id} - Title:${result?.title}`,
   });

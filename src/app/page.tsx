@@ -1,20 +1,19 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import Link from "next/link";
-import PostHogClient from "@/components/postHog/PostHogClient";
+import { trackPostHogServerEvents } from "@/tracking/postHog/trackPostHogServerEvents";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
 export default async function Home() {
   const posts = await getData();
-  const postHogClient = PostHogClient();
 
   /**
    *
    * SERVER SIDE EVENTS POSTHOG NODE
    */
 
-  postHogClient.capture({
+  trackPostHogServerEvents({
     distinctId: "ger@paisanos.io",
     event: "Home Page Viewed",
   });
