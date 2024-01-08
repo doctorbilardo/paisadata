@@ -1,7 +1,6 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import Link from "next/link";
-import { trackPostHogServerEvents } from "@/tracking/postHog/trackPostHogServerEvents";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
@@ -12,16 +11,8 @@ export default async function Home() {
    *
    * SERVER SIDE EVENTS POSTHOG NODE
    */
-
-  trackPostHogServerEvents({
-    distinctId: "ger@paisanos.io",
-    event: "Home Page Viewed",
-  });
-
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-8`}
-    >
+    <main className={`flex min-h-screen flex-col items-center gap-4`}>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/50 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           <code className="font-mono font-bold text-lg text-yellow-400">
@@ -47,11 +38,11 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="relative flex  flex-col text-center ">
+      <div className="relative flex  flex-col text-center pb-6 ">
         <h1
-          className={`text-8xl font-bold text-lime-500 mb-3 ${National.className}`}
+          className={`text-7xl font-bold text-lime-500 ${National.className}`}
         >
-          PAISADATA
+          PAISADATA 🧉
         </h1>
 
         <p className={`m-0 max-w-[30ch]  text-amber-300 text-2xl`}>
@@ -60,21 +51,25 @@ export default async function Home() {
         </p>
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
         <Link
           href="/segment"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
+          <h2 className={`mb-3 text-2xl font-semibold text-center`}>
             Segment{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm   text-amber-300`}>
+          <p
+            className={`m-0 max-w-[30ch] text-md   text-amber-300 text-center`}
+          >
             Facilita la recopilación y envío de datos entre diferentes
-            herramientas y destinos. Funciona como una capa de abstracción e/
-            las fuentes de datos y las herramientas de análisis o marketing.
+            herramientas y destinos.
+          </p>
+          <p className="text-black p-2  text-center mt-6 rounded-lg text-2xl font-bold bg-red-600">
+            Herramienta descartada
           </p>
         </Link>
 
@@ -82,14 +77,17 @@ export default async function Home() {
           href="/googleTagManager"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
+          <h2 className={`mb-3 text-2xl font-semibold text-center`}>
             Google Tag Manager{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm  text-amber-300`}>
+          <p className={`m-0 max-w-[30ch] text-sm  text-amber-300 text-center`}>
             Permite evaluar y mejorar la calidad general de una página web a
+          </p>
+          <p className="text-black p-2  text-center mt-6 rounded-lg text-2xl font-bold bg-red-600">
+            Herramienta descartada
           </p>
         </Link>
 
@@ -97,32 +95,44 @@ export default async function Home() {
           href="/postHog"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
+          <p className="text-4xl text-center mb-4">🎊</p>
+          <h2 className={`mb-3 text-2xl font-semibold text-center`}>
             PostHog {""}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm  text-amber-300`}>
+          <p className={`m-0 max-w-[30ch] text-sm  text-amber-300 text-center`}>
             Facilita la obtención de datos sobre el tráfico y el uso de su
-            aplicación
+            aplicación. Herramienta OpenSource
+          </p>
+          <p className="text-white p-2  text-center mt-6 rounded-lg text-2xl font-bold bg-green-600">
+            Herramienta seleccionada
           </p>
         </Link>
       </div>
 
-      <h2 className="text-xl font-bold text-yellow-300">Posts</h2>
-      <ul>
+      <h2 className="font-bold text-yellow-300 text-3xl">Posts</h2>
+      <div className="grid gap-6  text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
         {posts?.map((post) => (
           <div
             key={post?.id}
-            className="p-4 mb-4 text-center border space-y-6 rounded-lg"
+            className="p-12 mb-4 text-center border space-y-6 rounded-lg group  border-transparent px-5 py-8 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
           >
             <Link href={`/posts/${post.id}`}>
-              <span>{post.title}</span>
+              <h2 className={`mb-3 text-2xl font-semibold text-center`}>
+                Post {post?.id}
+                <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                  -&gt;
+                </span>
+              </h2>
+              <span className="text-2xl  text-green-600 font-bold ">
+                {post.title}
+              </span>
             </Link>
           </div>
         ))}
-      </ul>
+      </div>
     </main>
   );
 }

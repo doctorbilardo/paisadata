@@ -25,7 +25,8 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
       if (searchParams.toString()) {
         url = url + "?" + searchParams.toString();
       }
-      posthog.capture("pageView", { $current_url: url });
+
+      posthog.capture(pathname, { $current_url: url });
     }
   }, [pathname, searchParams]);
 

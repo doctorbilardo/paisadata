@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import useSendSwitchSectionEvent from "@/tracking/segment/hooks/useSendSwitchSectionEvent";
 import { usePathname } from "next/navigation";
 import useSegmentIdentifyUser from "@/tracking/segment/hooks/useSegmentIdentifyUser";
+import { trackPostHogClientEvents } from "@/tracking/postHog/trackPostHogClientEvents";
 
 
 export default function Segment() {
@@ -21,6 +22,9 @@ export default function Segment() {
   }, [identifySegmentEvent, pathname, sendSwitchSectionEvent]);
 
 
+  trackPostHogClientEvents('segment_VISITED', {
+    visitedSegment: pathname
+  })
 
   return (
     <main className={`flex min-h-screen flex-col items-center p-2 `}>

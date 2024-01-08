@@ -19,6 +19,8 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: #11190C;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 p, h3 {

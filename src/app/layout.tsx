@@ -4,11 +4,10 @@ import "./globals.css";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { GeistSans } from "geist/font/sans";
-import {
-  PHProvider,
-
-} from "@/components/postHog/PostHogPageview";
-import { Suspense } from "react";
+import { PHProvider } from "@/components/postHog/PostHogPageview";
+import { getServerSession } from "next-auth";
+import SessionProvider from "../components/SessionProvider/SessionProvider";
+import NavAuth from "@/components/navAuth/NavAuth";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
@@ -17,15 +16,17 @@ export const metadata: Metadata = {
   description: "Seteo de herramientas para un enfoque DataDriven",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const estiloDiv = {
+  const divStyle = {
     display: "none",
     visibility: "hidden",
   };
+
+  const session = await getServerSession();
 
   return (
     <html lang="en" className={National.className}>
@@ -60,18 +61,25 @@ export default function RootLayout({
           }}
         />
       </head>
-     
+
       <PHProvider>
         <body className={GeistSans.className}>
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-T77K6DD6"
-              height="0"
-              width="0"
-              style={estiloDiv as React.CSSProperties}
-            ></iframe>
-          </noscript>
-          {children}
+          <SessionProvider session={session}>
+            <noscript>
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-T77K6DD6"
+                height="0"
+                width="0"
+                style={divStyle as React.CSSProperties}
+              ></iframe>
+            </noscript>
+            <NavAuth sessionAuth={
+              session
+            }>
+              
+            {children}
+            </NavAuth>
+          </SessionProvider>
         </body>
       </PHProvider>
     </html>

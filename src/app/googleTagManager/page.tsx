@@ -2,10 +2,10 @@
 "use client";
 import { Header } from "@/components/header";
 import localFont from "next/font/local";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
-import useSendGTMEvents from "@/tracking/GTM/hooks/useGtmTrackEvents";
 import { Modal } from "@/components/modal";
+import { trackPostHogClientEvents } from "@/tracking/postHog/trackPostHogClientEvents";
 const National = localFont({ src: "../fonts/national.otf" });
 
 export default function GoogleTagManager() {
@@ -19,13 +19,13 @@ export default function GoogleTagManager() {
   /**
    * @method useSendGTMEvents It is a factory of functions that serve to track GTM events.
    * @return functions to track GTM events.
-   */
+
   const { sendGtmUserEvent, sendNameSectionEvent, sendChampionsEvent } =
     useSendGTMEvents();
 
   /**
    * In the following useEffect I am using events sendGtmUserEvent, sendNameSectionEvent previously extracted
-   */
+
 
   useEffect(() => {
     sendGtmUserEvent("German Derbes", "g.derbes@paisanos.io");
@@ -35,6 +35,12 @@ export default function GoogleTagManager() {
   /*********************************************/
   /********************GTM**********************/
   /*********************************************/
+
+
+
+  trackPostHogClientEvents('googleTagManager_VISITED', {
+    visitedSegment: pathname
+  })
 
   return (
     <>
@@ -106,7 +112,7 @@ export default function GoogleTagManager() {
                     
                     */
                   }
-                  setIsOpen(true), sendChampionsEvent(pathname);
+                  setIsOpen(true);
                 }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
