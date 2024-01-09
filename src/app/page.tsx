@@ -1,6 +1,7 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import Link from "next/link";
+import { trackPostHogServerEvents } from "@/tracking/postHog/trackPostHogServerEvents";
 
 const National = localFont({ src: "./fonts/national.otf" });
 
@@ -11,6 +12,12 @@ export default async function Home() {
    *
    * SERVER SIDE EVENTS POSTHOG NODE
    */
+
+  trackPostHogServerEvents({
+    distinctId:'g.derbes@paisanos.io',
+    event: 'capture user'
+  })
+
   return (
     <main className={`flex min-h-screen flex-col items-center gap-4`}>
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
@@ -110,29 +117,47 @@ export default async function Home() {
             Herramienta seleccionada
           </p>
         </Link>
+
+
+        <Link
+          href="/serverFeaturesFlags"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
+        >
+        
+          <h2 className={`mb-3 text-2xl font-semibold text-center text-orange-400`}>
+            Ir a Server Features Flags Page {""}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+ 
+        </Link>
       </div>
 
       <h2 className="font-bold text-yellow-300 text-3xl">Posts</h2>
-      <div className="grid gap-6  text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
-        {posts?.map((post) => (
-          <div
-            key={post?.id}
-            className="p-12 mb-4 text-center border space-y-6 rounded-lg group  border-transparent px-5 py-8 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
-          >
-            <Link href={`/posts/${post.id}`}>
-              <h2 className={`mb-3 text-2xl font-semibold text-center`}>
-                Post {post?.id}
-                <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                  -&gt;
+
+      
+        <div className="grid gap-6  text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
+          {posts?.map((post) => (
+            <div
+              key={post?.id}
+              className="p-12 mb-4 text-center border space-y-6 rounded-lg group  border-transparent px-5 py-8 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
+            >
+              <Link href={`/posts/${post.id}`}>
+                <h2 className={`mb-3 text-2xl font-semibold text-center`}>
+                  Post {post?.id}
+                  <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                    -&gt;
+                  </span>
+                </h2>
+                <span className="text-2xl  text-green-600 font-bold ">
+                  {post.title}
                 </span>
-              </h2>
-              <span className="text-2xl  text-green-600 font-bold ">
-                {post.title}
-              </span>
-            </Link>
-          </div>
-        ))}
-      </div>
+              </Link>
+            </div>
+          ))}
+        </div>
+      
     </main>
   );
 }
