@@ -177,7 +177,7 @@ const Home = async () => {
   );
 }
 
-export async function getData() {
+const getData = async () => {
   const posts = await import("../../blog.json");
   return posts?.posts;
 }
