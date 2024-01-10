@@ -4,7 +4,7 @@ import { Header } from "@/components/header";
 import { trackPostHogClientEvents } from "@/tracking/postHog/trackPostHogClientEvents";
 import localFont from "next/font/local";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFeatureFlagEnabled } from "posthog-js/react";
 
 const National = localFont({ src: "../fonts/national.otf" });
@@ -13,18 +13,43 @@ export default function PostHog() {
   const [email, setEmail] = useState<string>("");
   const pathname = usePathname();
 
+
+  useEffect(() => {
+    setTimeout(() => {
+      const h2 = document.querySelector('h2');
+      console.log(h2);
+      
+      if (h2) {
+        h2.classList.add('delayed-survey');
+      }
+    }, 3000);
+  }, []);
+
   /********************************************* /
   /**************** POST HOG  ****************** /
   /********************************************* /
   /**
-   * @method clickEvent
+   * @method clickPostHog
    * @return register a posthog event
    */
+
+  const clickPostHog = () => {
+    trackPostHogClientEvents("clickPostHogSite", {
+      postHogVisited: true,
+    });
+  };
+
+
+
+
+
   const clickEvent = () => {
     trackPostHogClientEvents("click", {
       clickedButton: true,
     });
   };
+
+
 
   trackPostHogClientEvents("postHog_VISITED", {
     visitedSegment: pathname,
@@ -56,6 +81,7 @@ export default function PostHog() {
             className="text-green-500 font-mono  font-bold p-5 mb-4"
             href="https://posthog.com/"
             target="_blank"
+            onClick={clickPostHog}
           >
             Visitar documentación
           </a>
@@ -194,3 +220,6 @@ export default function PostHog() {
     </main>
   );
 }
+
+
+

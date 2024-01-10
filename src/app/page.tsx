@@ -5,7 +5,8 @@ import { trackPostHogServerEvents } from "@/tracking/postHog/trackPostHogServerE
 
 const National = localFont({ src: "./fonts/national.otf" });
 
-export default async function Home() {
+
+const Home = async () => {
   const posts = await getData();
 
   /**
@@ -132,6 +133,20 @@ export default async function Home() {
           </h2>
  
         </Link>
+
+        <Link
+          href="/surveys"
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-lime-500 hover:dark:bg-neutral-800/40"
+        >
+        
+          <h2 className={`mb-3 text-2xl font-semibold text-center text-orange-400`}>
+            Ir Surveys Page {""}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+ 
+        </Link>
       </div>
 
       <h2 className="font-bold text-yellow-300 text-3xl">Posts</h2>
@@ -166,3 +181,6 @@ export async function getData() {
   const posts = await import("../../blog.json");
   return posts?.posts;
 }
+
+
+export default Home; 
